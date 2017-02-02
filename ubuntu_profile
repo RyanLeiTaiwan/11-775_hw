@@ -22,5 +22,9 @@ PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 # Yu-Heng Lei
 export EDITOR=vim
 alias df='df -h'
-alias ll='ll -h'
-alias la='la -h'
+alias du='du -h'
+alias ll='ls -lh'
+alias la='ls -ah'
+alias lla='ls -lah'
+alias vi='sudo vim'
+alias vim='sudo vim'
