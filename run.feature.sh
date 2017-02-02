@@ -7,20 +7,20 @@
 # your own setups.
 
 # Paths to different tools; 
-opensmile_path=/home/ubuntu/tools/opensmile-2.3.0/bin/linux_x64_standalone_static
-ffmpeg_path=/home/ubuntu/tools/FFmpeg/build/bin/
+opensmile_path=$HOME/tools/opensmile-2.3.0/bin/linux_x64_standalone_static
+ffmpeg_path=$HOME/tools/FFmpeg/build/bin/
 export PATH=$opensmile_path:$ffmpeg_path:$PATH
 export LD_LIBRARY_PATH=$ffmpeg_path/libs:$opensmile_path/lib:$LD_LIBRARY_PATH
 
 # Two additional variables
-video_path=/home/ubuntu/video   # path to the directory containing all the videos.
+video_path=$HOME/video   # path to the directory containing all the videos.
 cluster_num=50        # the number of clusters in k-means. Note that 50 is by no means the optimal solution.
                       # You need to explore the best config by yourself.
 mkdir -p audio mfcc kmeans
 
 # This part does feature extraction, it may take quite a while if you have a lot of videos. Totally 3 steps are taken:
 # 1. ffmpeg extracts the audio track from each video file into a wav file
-# 2. The wav file may contain 2 channels. We always extract the 1st channel using ch_wave
+# 2. The wav file may contain 2 channels. We always extract the 1st channel using sox (instead of ch_wave)
 # 3. SMILExtract generates the MFCC features for each wav file
 #    The config file MFCC12_0_D_A.conf generates 13-dim MFCCs at each frame, together with the 1st and 2nd deltas. So you 
 #    will see each frame totally has 39 dims. 
