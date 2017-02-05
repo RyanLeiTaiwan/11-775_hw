@@ -1,15 +1,13 @@
 #!/bin/bash
 
 
-MAP=1
-START=$(date +%s.%N)
 
-echo your testing data here
+echo P001 MAP: $MAPP001
+echo P002 MAP: $MAPP002
+echo P003 MAP: $MAPP003
 
-END=$(date +%s.%N)
-DIFF=$(echo "$END - $START" | bc)
 
-echo Time extracting feautres: $DIFF
-echo MAP: $MAP
-
+echo P001 CLASS ACCURACY: $CAP001
+echo P002 CLASS ACCURACY: $CAP002
+echo P003 CLASS ACCURACY: $CAP003
 
