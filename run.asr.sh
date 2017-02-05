@@ -30,5 +30,5 @@ cp $eesen_path/build/output/*.txt asrtxt
 # You can of course explore other better ways, such as TF-IDF, of generating these features.
 echo "[Fake] Creating ASR features"
 mkdir -p asrfeat
-python scripts/create_asrfeat.py vocab list/all.video #|| exit 1;
+python scripts/create_asrfeat.py vocab list/all.video || exit 1;
 
