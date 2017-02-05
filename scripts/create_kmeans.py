@@ -4,7 +4,8 @@ import os
 import cPickle
 from sklearn.cluster.k_means_ import KMeans
 import sys
-# Generate k-means features for videos; each video is represented by a single vector
+# Generate k-means features for videos;
+# each video is represented by a single vector
 
 if __name__ == '__main__':
     if len(sys.argv) != 4:
