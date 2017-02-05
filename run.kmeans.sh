@@ -3,10 +3,10 @@
 # An example script for feature extraction of Homework 1
 
 # Paths to different tools; 
-opensmile_path=/home/ubuntu/tools/opensmile-2.3.0/bin/linux_x64_standalone_static
-ffmpeg_path=/home/ubuntu/tools/FFmpeg/build/bin/
-export PATH=$opensmile_path:$ffmpeg_path:$PATH
-export LD_LIBRARY_PATH=$ffmpeg_path/libs:$opensmile_path/lib:$LD_LIBRARY_PATH
+#opensmile_path=/home/ubuntu/tools/opensmile-2.3.0/bin/linux_x64_standalone_static
+#ffmpeg_path=/home/ubuntu/tools/FFmpeg/build/bin/
+#export PATH=$opensmile_path:$ffmpeg_path:$PATH
+#export LD_LIBRARY_PATH=$ffmpeg_path/libs:$opensmile_path/lib:$LD_LIBRARY_PATH
 
 # Two additional variables
 video_path=/home/ubuntu/video   # path to the directory containing all the videos.
@@ -29,12 +29,4 @@ python scripts/create_kmeans.py kmeans.${cluster_num}.model $cluster_num list/al
 
 # Now you can see that you get the bag-of-word representations under kmeans/. Each video is now represented
 # by a {cluster_num}-dimensional vector.
-
-# Now we generate the ASR-based features. This requires a vocabulary file to available beforehand. Each video is represented by
-# a vector which has the same dimension as the size of the vocabulary. The elements of this vector are the number of occurrences 
-# of the corresponding word. The vector is normalized to be like a probability. 
-# You can of course explore other better ways, such as TF-IDF, of generating these features.
-echo "Creating ASR features"
-mkdir -p asrfeat
-python scripts/create_asrfeat.py vocab list/all.video || exit 1;
 
