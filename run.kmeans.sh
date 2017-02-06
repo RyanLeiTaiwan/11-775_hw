@@ -31,6 +31,7 @@ done
 
 # Now that we have the k-means model, we can represent a whole video with the histogram of its MFCC vectors over the clusters. 
 # Each video is represented by a single vector which has the same dimension as the number of clusters. 
+cluster_num=10
 #echo "Creating k-means cluster vectors"
 #python2 scripts/create_kmeans.py kmeans_models/kmeans.${cluster_num}.model $cluster_num list/all.video || exit 1;
 

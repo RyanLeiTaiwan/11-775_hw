@@ -34,5 +34,5 @@ if __name__ == '__main__':
 
     # Output the cluster centroids
     output_file = open(output_filename, "wb")
-    cPickle.dump(kmeans.cluster_centers_, output_file)
+    cPickle.dump(kmeans, output_file)
     print "K-means model trained and output successfully!"
