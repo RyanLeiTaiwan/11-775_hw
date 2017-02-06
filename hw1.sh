@@ -4,14 +4,14 @@
 map_path=../tools/mAP
 export PATH=$map_path:$PATH
 
-# Report ASR accuracies because they are higher
+# Either "mfcc" or "asr". Use the better pipeline
 pipeline=mfcc
 
 # Run the testing scripts
 feat_dim_mfcc=150
 python2 scripts/test_svm.py mfcc_pred/svm.P001.model "kmeans" $feat_dim_mfcc mfcc_pred/P001_pred
-python2 scripts/test_svm.py mfcc_pred/svm.P002.model "kmeans" $feat_dim_mfcc mfcc_pred/P001_pred
-python2 scripts/test_svm.py mfcc_pred/svm.P003.model "kmeans" $feat_dim_mfcc mfcc_pred/P001_pred
+python2 scripts/test_svm.py mfcc_pred/svm.P002.model "kmeans" $feat_dim_mfcc mfcc_pred/P002_pred
+python2 scripts/test_svm.py mfcc_pred/svm.P003.model "kmeans" $feat_dim_mfcc mfcc_pred/P003_pred
 
 # Compute (M)AP
 MAPP001=$(ap list/P001_test_label $pipeline"_pred/P001_pred" | awk '{print $2}')
