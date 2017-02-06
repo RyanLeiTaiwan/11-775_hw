@@ -36,7 +36,7 @@ if __name__ == '__main__':
         mfcc_csv_file = mfcc_path + video + mfcc_suffix
         # Load the MFCC file of all the frames
         mfcc_matrix = np.loadtxt(mfcc_csv_file, delimiter=";")
-        feat_dim = mfcc_matrix.shape[0]
+        feat_dim = mfcc_matrix.shape[1]
         print mfcc_csv_file + ": " + str(mfcc_matrix.shape)
         # Predict cluster labels
         labels = kmeans.predict(mfcc_matrix)
