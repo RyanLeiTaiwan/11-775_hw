@@ -4,7 +4,7 @@ import numpy as np
 # import os
 # from sklearn.svm.classes import SVC
 from sklearn.svm import SVC
-from sklearn.preprocessing
+from sklearn import preprocessing
 import cPickle
 import sys
 
