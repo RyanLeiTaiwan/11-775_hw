@@ -21,7 +21,7 @@ if __name__ == '__main__':
     mfcc_path = "mfcc/"
     mfcc_suffix = ".mfcc.csv"
     output_path = "kmeans/"
-    BoW_suffix = ".kmeans.csv"
+    BoW_suffix = ".bow.csv"
 
     # Load K-means model
     print "Load K-means model: " + kmeans_model
@@ -36,12 +36,13 @@ if __name__ == '__main__':
         mfcc_csv_file = mfcc_path + video + mfcc_suffix
         # Load the MFCC file of all the frames
         mfcc_matrix = np.loadtxt(mfcc_csv_file, delimiter=";")
+        feat_dim = mfcc_matrix.shape[0]
         print mfcc_csv_file + ": " + str(mfcc_matrix.shape)
         # Predict cluster labels
         labels = kmeans.predict(mfcc_matrix)
 
         # Count frequencies and output BoW features
-        BoW = np.array([np.bincount(labels)])
+        BoW = np.array([np.bincount(labels, minlength=feat_dim)])
         np.savetxt(output_path + video + BoW_suffix, BoW, fmt="%d", delimiter=";")
 
     print "K-means features generated successfully!"
