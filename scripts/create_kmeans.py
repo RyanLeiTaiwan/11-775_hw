@@ -2,7 +2,7 @@
 import numpy as np
 # import os
 import cPickle
-from sklearn.cluster import KMeans
+# from sklearn.cluster import KMeans
 import sys
 # Generate k-means features for videos;
 # each video is represented by a single vector

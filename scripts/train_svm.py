@@ -4,6 +4,7 @@ import numpy as np
 # import os
 # from sklearn.svm.classes import SVC
 from sklearn.svm import SVC
+from sklearn.preprocessing
 import cPickle
 import sys
 
@@ -52,7 +53,8 @@ if __name__ == '__main__':
     # Train SVM
     print "Training SVM"
     svm = SVC()
-    svm.fit(X, y)
+    # Normalize each column into 0 mean, 1 variance
+    svm.fit(preprocessing.scale(X), y)
 
     # Output model
     fout = open(output_file, "wb")
