@@ -28,8 +28,8 @@ for event in P001 P002 P003; do
   python2 scripts/train_svm.py $event "kmeans" $feat_dim_mfcc mfcc_pred/svm.$event.model || exit 1;
   # apply the svm model to *ALL* the testing videos;
   # output the score of each testing video to a file ${event}_pred 
-#  python2 scripts/test_svm.py mfcc_pred/svm.$event.model "kmeans/" mfcc_pred/${event}_pred || exit 1;
+  python2 scripts/test_svm.py mfcc_pred/svm.$event.model "kmeans" $feat_dim_mfcc mfcc_pred/${event}_pred || exit 1;
   # compute the average precision by calling the mAP package
-#  ap list/${event}_test_label mfcc_pred/${event}_pred
+  ap list/${event}_test_label mfcc_pred/${event}_pred
 done
 

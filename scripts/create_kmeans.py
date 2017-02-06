@@ -15,7 +15,7 @@ if __name__ == '__main__':
         print "file_list -- the list of videos"
         exit(1)
 
-    kmeans_model = sys.argv[1]
+    kmeans_model = open(sys.argv[1], "rb")
     cluster_num = int(sys.argv[2])
     file_list = sys.argv[3]
     mfcc_path = "mfcc/"
@@ -25,7 +25,7 @@ if __name__ == '__main__':
 
     # Load K-means model
     print "Load K-means model: " + kmeans_model
-    kmeans = cPickle.load(open(kmeans_model, "rb"))
+    kmeans = cPickle.load(kmeans_model)
 
     # Load file list
     print "Load file list"

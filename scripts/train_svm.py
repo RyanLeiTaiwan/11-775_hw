@@ -25,7 +25,7 @@ if __name__ == '__main__':
     output_file = sys.argv[4]
     feat_suffix = ".bow.csv"
 
-    # Load the list file
+    # Load the training list file
     list_filename = "list/" + event_name + "_train"
     print "Load the list file: " + list_filename
     list_file = open(list_filename).read().splitlines()
@@ -34,7 +34,7 @@ if __name__ == '__main__':
     for line in list_file:
         tok = line.split(" ")
         X_filename = feat_dir + "/" + tok[0] + feat_suffix
-        print X_filename
+        # print X_filename
         data = np.loadtxt(X_filename, delimiter=";").tolist()
         assert(len(data) == feat_dim)
         X.append(data)
@@ -52,7 +52,7 @@ if __name__ == '__main__':
 
     # Train SVM
     print "Training SVM"
-    svm = SVC()
+    svm = SVC(probability=True)
     # Normalize each column into 0 mean, 1 variance
     svm.fit(preprocessing.scale(X), y)
 
