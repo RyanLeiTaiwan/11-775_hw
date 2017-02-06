@@ -21,7 +21,7 @@ if __name__ == '__main__':
 
     # random selection is done by randomizing the rows of the whole matrix, and then selecting the first 
     # num_of_frame * ratio rows
-    numpy.random.seed(18877)
+    numpy.random.seed(11775)
 
     for line in fread.readlines():
         mfcc_path = "mfcc/" + line.replace('\n','') + ".mfcc.csv"
