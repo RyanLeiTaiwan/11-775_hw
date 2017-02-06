@@ -21,8 +21,8 @@ echo "#####################################"
 mkdir -p mfcc_pred
 # iterate over the events
 feat_dim_mfcc=150
-#for event in P001 P002 P003; do
-for event in P001; do
+for event in P001 P002 P003; do
+#for event in P001; do
   echo "=========  Event $event  ========="
   # now train a svm model
   python2 scripts/train_svm.py $event "kmeans" $feat_dim_mfcc mfcc_pred/svm.$event.model || exit 1;

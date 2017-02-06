@@ -39,5 +39,6 @@ if __name__ == '__main__':
         output_filename = output_folder + "/kmeans." + str(cluster_num) + ".model"
         output_file = open(output_filename, "wb")
         cPickle.dump(kmeans, output_file)
-    print "K-means model trained and output successfully!"
+        output_file.close()
 
+    print "K-means model trained and output successfully!"

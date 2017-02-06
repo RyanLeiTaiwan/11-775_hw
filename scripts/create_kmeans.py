@@ -30,6 +30,7 @@ if __name__ == '__main__':
     # Load file list
     print "Load file list"
     files = open(file_list, "r").read().splitlines()
+    files.close()
 
     # For each video
     for video in files:
