@@ -2,7 +2,7 @@
 import numpy as np
 # import os
 import cPickle
-# from sklearn.cluster import KMeans
+from sklearn.cluster import KMeans
 import sys
 # Generate k-means features for videos;
 # each video is represented by a single vector
@@ -21,10 +21,10 @@ if __name__ == '__main__':
     mfcc_path = "mfcc/"
     mfcc_suffix = ".mfcc.csv"
     output_path = "kmeans/"
-    BoW_suffix = ".bow.csv"
+    BoW_suffix = ".kmeans.csv"
 
     # Load K-means model
-    print "Load K-means model"
+    print "Load K-means model: " + kmeans_model
     kmeans = cPickle.load(open(kmeans_model, "rb"))
 
     # Load file list
@@ -41,7 +41,7 @@ if __name__ == '__main__':
         labels = kmeans.predict(mfcc_matrix)
 
         # Count frequencies and output BoW features
-        BoW = np.bincount(labels)
-        np.savetxt(output_path + video + BoW_suffix, BoW, delimiter=';')
+        BoW = np.array([np.bincount(labels)])
+        np.savetxt(output_path + video + BoW_suffix, BoW, fmt="%d", delimiter=";")
 
     print "K-means features generated successfully!"
