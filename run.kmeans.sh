@@ -18,18 +18,21 @@ cluster_num=10        # the number of clusters in k-means. Note that 50 is by no
 #echo "Pooling MFCCs (optional)"
 #python scripts/select_frames.py list/train.video 0.2 select.mfcc.csv || exit 1;
 
-
-echo "cluster_num: $cluster_num"
-# now trains a k-means model using the sklearn package
+# Now trains a k-means model using the sklearn package
 echo "Training the k-means model"
 mkdir -p kmeans_models
+# Try different number of clusters
+for cluster_num in `seq 10 10 100`
+do
+    echo "cluster_num: $cluster_num"
     #python2 scripts/train_kmeans.py small.mfcc.csv $cluster_num kmeans_models/kmeans.${cluster_num}.model || exit 1;
     python2 scripts/train_kmeans.py select.mfcc.csv $cluster_num kmeans_models/kmeans.${cluster_num}.model || exit 1;
+done
 
 # Now that we have the k-means model, we can represent a whole video with the histogram of its MFCC vectors over the clusters. 
 # Each video is represented by a single vector which has the same dimension as the number of clusters. 
-echo "Creating k-means cluster vectors"
-    python2 scripts/create_kmeans.py kmeans_models/kmeans.${cluster_num}.model $cluster_num list/all.video || exit 1;
+#echo "Creating k-means cluster vectors"
+#python2 scripts/create_kmeans.py kmeans_models/kmeans.${cluster_num}.model $cluster_num list/all.video || exit 1;
 
 # Now you can see that you get the bag-of-word representations under kmeans/. Each video is now represented
 # by a {cluster_num}-dimensional vector.

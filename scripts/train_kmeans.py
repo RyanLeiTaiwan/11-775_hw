@@ -20,7 +20,7 @@ if __name__ == '__main__':
 
     mfcc_csv_file = sys.argv[1]
     cluster_num = int(sys.argv[2])
-    output_file = open(sys.argv[3], "wb")
+    output_filename = sys.argv[3]
 
     # Set a fixed random seed so we can reproduce the results
     np.random.seed(11775)
@@ -33,5 +33,6 @@ if __name__ == '__main__':
     # print "k_means.cluster_centers_.shape: " + str(kmeans.cluster_centers_.shape)
 
     # Output the cluster centroids
+    output_file = open(output_filename, "wb")
     cPickle.dump(kmeans.cluster_centers_, output_file)
     print "K-means model trained and output successfully!"
