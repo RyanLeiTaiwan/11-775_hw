@@ -51,7 +51,7 @@ if __name__ == '__main__':
     print "y.shape: " + str(y.shape) + ", positive samples: " + str(sum(y == 1))
 
     # Train SVM
-    print "Training SVM"
+    # print "Training SVM"
     svm = SVC(probability=True)
     # Normalize each column into 0 mean, 1 variance
     svm.fit(preprocessing.scale(X), y)

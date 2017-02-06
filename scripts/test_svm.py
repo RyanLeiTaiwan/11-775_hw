@@ -39,15 +39,15 @@ if __name__ == '__main__':
         X.append(data)
 
     X = np.array(X)
-    print "X.shape: " + str(X.shape)
+    # print "X.shape: " + str(X.shape)
 
     # Test SVM
-    print "Testing SVM"
+    # print "Testing SVM"
     # Normalize each column into 0 mean, 1 variance
     y = svm.predict_proba(preprocessing.scale(X))[:, 1]
-    print "y.shape: " + str(y.shape)
+    # print "y.shape: " + str(y.shape)
 
     # Output prediction labels
     np.savetxt(output_file, y)
 
-    print "SVM tested and labels output successfully to " + output_file
+    # print "SVM tested and labels output successfully to " + output_file
