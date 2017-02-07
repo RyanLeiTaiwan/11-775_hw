@@ -23,6 +23,7 @@ if __name__ == '__main__':
     rawtxt = []
     # BoW representation: TF
     model = CountVectorizer()
+    #model = TfidfVectorizer()
     files = file_list.read().splitlines()
     file_list.close()
     for video in files:

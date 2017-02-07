@@ -8,8 +8,8 @@
 # your own setups. 
 
 # Paths to different tools; 
-#map_path=/home/ubuntu/tools/mAP
-map_path=..//tools/mAP
+map_path=/home/ubuntu/tools/mAP
+#map_path=..//tools/mAP
 export PATH=$map_path:$PATH
 
 echo ""
@@ -18,7 +18,7 @@ echo "#       MED with ASR Features       #"
 echo "#####################################"
 mkdir -p asr_pred
 # iterate over the events
-feat_dim_asr=4677
+feat_dim_asr=4677  # This is calculated in scripts/create_asrfeat.py
 for event in P001 P002 P003; do
   echo "=========  Event $event  ========="
   # Now train a svm model

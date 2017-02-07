@@ -11,8 +11,8 @@
 opensmile_path=/home/ubuntu/tools/openSMILE-2.1.0/bin/linux_x64_standalone_static
 speech_tools_path=/home/ubuntu/tools/speech_tools/bin
 ffmpeg_path=/home/ubuntu/tools/ffmpeg-2.2.4
-#map_path=/home/ubuntu/tools/mAP
-map_path=../tools/mAP
+map_path=/home/ubuntu/tools/mAP
+#map_path=../tools/mAP
 export PATH=$opensmile_path:$speech_tools_path:$ffmpeg_path:$map_path:$PATH
 export LD_LIBRARY_PATH=$ffmpeg_path/libs:$opensmile_path/lib:$LD_LIBRARY_PATH
 
@@ -23,7 +23,6 @@ mkdir -p mfcc_pred
 # iterate over the events
 feat_dim_mfcc=150
 for event in P001 P002 P003; do
-#for event in P001; do
   echo "=========  Event $event  ========="
   # Now train a svm model
   echo "Training SVM"

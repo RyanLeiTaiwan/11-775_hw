@@ -1,10 +1,10 @@
 #!/bin/bash
 
-#map_path=/home/ubuntu/tools/mAP
-map_path=../tools/mAP
+map_path=/home/ubuntu/tools/mAP
+#map_path=../tools/mAP
 export PATH=$map_path:$PATH
 
-# Either "mfcc" or "asr". Use the better pipeline
+# Either "mfcc" or "asr"
 pipeline=mfcc
 
 # Run the testing scripts

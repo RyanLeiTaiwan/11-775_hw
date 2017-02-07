@@ -14,8 +14,6 @@ export LD_LIBRARY_PATH=$ffmpeg_path/libs:$opensmile_path/lib:$LD_LIBRARY_PATH
 
 # Two additional variables
 video_path=$HOME/video   # path to the directory containing all the videos.
-cluster_num=50        # the number of clusters in k-means. Note that 50 is by no means the optimal solution.
-                      # You need to explore the best config by yourself.
 mkdir -p audio mfcc kmeans
 
 # This part does feature extraction, it may take quite a while if you have a lot of videos. Totally 3 steps are taken:
