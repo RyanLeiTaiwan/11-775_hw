@@ -24,6 +24,9 @@ if __name__ == '__main__':
     feat_dim = int(sys.argv[3])
     output_file = sys.argv[4]
     feat_suffix = ".bow.csv"
+    
+    # Set a fixed random seed so we can reproduce the results
+    np.random.seed(11775)
 
     # Load the training list file
     list_filename = "list/" + event_name + "_train"

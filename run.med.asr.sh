@@ -8,8 +8,7 @@
 # your own setups. 
 
 # Paths to different tools; 
-map_path=/home/ubuntu/tools/mAP
-#map_path=..//tools/mAP
+map_path=../tools/mAP
 export PATH=$map_path:$PATH
 
 echo ""
