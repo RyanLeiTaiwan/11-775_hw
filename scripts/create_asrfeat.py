@@ -22,8 +22,11 @@ if __name__ == '__main__':
     # For each video
     rawtxt = []
     # BoW representation: TF
+    # "Noisewords" produced by EESEN ASR tool
+    # noisewords = ['breath', 'cough', 'smack', 'um']
     model = CountVectorizer()
-    #model = TfidfVectorizer()
+    # model = CountVectorizer(stop_words=noisewords + list(ENGLISH_STOP_WORDS))
+    # model = TfidfVectorizer(stop_words=noisewords + list(ENGLISH_STOP_WORDS))
     files = file_list.read().splitlines()
     file_list.close()
     for video in files:
