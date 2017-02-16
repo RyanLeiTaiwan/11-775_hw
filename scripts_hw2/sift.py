@@ -18,8 +18,8 @@ if __name__ == '__main__':
     keypoint_path = sys.argv[3]
 
     print 'Extracting SIFT features...'
-    # for video in video_list:
-    for video in ['HVC51']:
+    # for video in ['HVC51']:
+    for video in video_list:
         pathname = keyframe_path + '/' + video
         for frame in os.listdir(pathname):
             # Skip non-jpg files
@@ -33,17 +33,16 @@ if __name__ == '__main__':
 
                 # keypoint coordinates and descriptors
                 kp, des = sift.detectAndCompute(gray, None)
-                outputName = pathname + '/' + frame.split('.')[0] + sift_suffix
-                print 'Output: ' + outputName
-                np.savetxt(outputName, des, fmt='%.6e', delimiter=';')
+                # Skip frames without any keypoints
+                if des is not None:
+                    outputName = pathname + '/' + frame.split('.')[0] + sift_suffix
+                    print 'Output: ' + outputName
+                    np.savetxt(outputName, des, fmt='%.6e', delimiter=';')
 
-                # If we want to output the keypoint images
-                # kpName = keypoint_path + '/' + video + '/' + frame
-                # print 'Keypoint: ' + kpName
-                # kpImg = None
-                # kpImg = cv2.drawKeypoints(img, kp, kpImg)
-                # cv2.imwrite(kpName, kpImg)
-
-
-
+                    # If we want to draw and output keypoint images
+                    # kpName = keypoint_path + '/' + video + '/' + frame
+                    # print 'Keypoint: ' + kpName
+                    # kpImg = None
+                    # kpImg = cv2.drawKeypoints(img, kp, kpImg)
+                    # cv2.imwrite(kpName, kpImg)
     print 'SIFT features generated successfully!'
