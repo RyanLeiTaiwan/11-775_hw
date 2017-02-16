@@ -21,7 +21,7 @@ if __name__ == '__main__':
     # Set a fixed random seed so we can reproduce the results
     np.random.seed(11775)
 
-    # # Load the sparse feature file
+    print 'Loading sparse feature files...'
     X = []
     # for video in ['HVC51']:
     for video in video_list:

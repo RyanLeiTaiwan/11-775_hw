@@ -1,7 +1,7 @@
 import numpy as np
 import caffe
-import sys
 import os
+import sys
 import fnmatch
 import cPickle
 
