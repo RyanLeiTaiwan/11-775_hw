@@ -1,0 +1,80 @@
+import numpy as np
+import caffe
+import sys
+import os
+import fnmatch
+import cPickle
+
+# Extract Caffe CNN feature (4096-dim in fc7 layer) for each keyframe
+# http://nbviewer.jupyter.org/github/BVLC/caffe/blob/master/examples/00-classification.ipynb
+# https://prateekvjoshi.com/2016/04/26/how-to-extract-feature-vectors-from-deep-neural-networks-in-python-caffe/
+
+if __name__ == '__main__':
+    if len(sys.argv) != 4:
+        print('Usage: {0} video_list keyframe_path cnn_path'.format(sys.argv[0]))
+        exit(1)
+
+    video_list = open(sys.argv[1], 'r').read().splitlines()
+    keyframe_path = sys.argv[2]
+    cnn_suffix = '.cnn.pk'
+    cnn_path = sys.argv[3]
+
+    print "Setting up Caffe CNN..."
+    batch_size = 1
+    layer = 'fc7'
+
+    # Set up Caffe CNN
+    caffe_root = '/home/ubuntu/tools/caffe/caffe/'
+    if os.path.isfile(caffe_root + 'models/bvlc_reference_caffenet/bvlc_reference_caffenet.caffemodel'):
+        print 'CaffeNet found.'
+    else:
+        print 'Error: pre-trained CaffeNet model not downloaded'
+        exit(1)
+    caffe.set_mode_cpu()
+    model_def = caffe_root + 'models/bvlc_reference_caffenet/deploy.prototxt'
+    model_weights = caffe_root + 'models/bvlc_reference_caffenet/bvlc_reference_caffenet.caffemodel'
+    net = caffe.Net(model_def, model_weights, caffe.TEST)
+    mu = np.load(caffe_root + 'python/caffe/imagenet/ilsvrc_2012_mean.npy')
+    mu = mu.mean(1).mean(1)
+    print 'mean-subtracted values:', zip('BGR', mu)
+    transformer = caffe.io.Transformer({'data': net.blobs['data'].data.shape})
+    transformer.set_transpose('data', (2,0,1))
+    transformer.set_mean('data', mu)
+    transformer.set_raw_scale('data', 255)
+    transformer.set_channel_swap('data', (2,1,0))
+    net.blobs['data'].reshape(batch_size, 3, 227, 227)
+    
+
+    print '\nExtracting Caffe CNN features...'
+    # Loop through each video's keyframe
+    #for video in ['HVC51']:
+    for video in video_list:
+        # Generate one matrix per video
+        X = []
+        pathname = keyframe_path + '/' + video
+        # Look for only jpg files
+        frames = fnmatch.filter(os.listdir(pathname), '*.jpg')
+        print 'video ' + video + ': ' + str(len(frames)) + ' keyframes'
+        for frame in frames:
+            inputName = pathname + '/' + frame
+            image = caffe.io.load_image(inputName)
+            transformed_image = transformer.preprocess('data', image)
+            net.blobs['data'].data[...] = transformed_image
+            # Run the forward procedure
+            output = net.forward()
+            # Extract the intermediate (fc7) layer as a numpy vector
+            #print sum(net.blobs[layer].data[0] != 0)
+            vector = net.blobs[layer].data[0]
+            X.append(list(vector))
+        X = np.array(X)
+        assert(X.shape[0] == len(frames))
+
+        # Output as cPickle
+        outputName = cnn_path + '/' + video + cnn_suffix
+        fout = open(outputName, 'wb')
+        cPickle.dump(X, fout)
+        print 'shape: ' + str(X.shape) + ' -> ' + outputName
+        fout.close()
+
+    print 'Caffe CNN features extracted successfully!'
+
