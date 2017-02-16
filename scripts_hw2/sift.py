@@ -40,9 +40,9 @@ if __name__ == '__main__':
                     np.savetxt(outputName, des, fmt='%.6e', delimiter=';')
 
                     # If we want to draw and output keypoint images
-                    # kpName = keypoint_path + '/' + video + '/' + frame
-                    # print 'Keypoint: ' + kpName
-                    # kpImg = None
-                    # kpImg = cv2.drawKeypoints(img, kp, kpImg)
-                    # cv2.imwrite(kpName, kpImg)
+                    kpName = keypoint_path + '/' + video + '/' + frame
+                    print 'Keypoint: ' + kpName
+                    kpImg = None
+                    kpImg = cv2.drawKeypoints(img, kp, kpImg)
+                    cv2.imwrite(kpName, kpImg)
     print 'SIFT features generated successfully!'
