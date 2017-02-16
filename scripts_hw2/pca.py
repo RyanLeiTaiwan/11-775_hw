@@ -50,17 +50,19 @@ if __name__ == '__main__':
     # X = cPickle.load(ftmp)
     # print 'Finished loading pk'
 
+    print 'Running PCA to examine the variance explained...'
     # Examine the % of variance explained by principal components
     pca = PCA()
-    # kpca = KernelPCA(kernel='rbf', fit_inverse_transform=True, gamma=10)
     pca.fit(X)
     var = np.cumsum(pca.explained_variance_ratio_)
     for ratio in [0.70, 0.75, 0.80, 0.85, 0.90, 0.95, 0.98, 0.99]:
         print str(ratio) + ' variance explained by ' + str(sum(var < ratio) + 1) + ' components'
     # Set the target dimensionality to the one retaining 0.99 variance
     pca_dim = sum(var < 0.99) + 1
+    print 'target dimensionality: ' + str(pca_dim)
 
     # Reduce dimensionality (sklearn requires us to 'fit' again)
+    print 'Running PCA again to reduce dimensionality...'
     pca.n_components = pca_dim
     X_pca = pca.fit_transform(X)
     print "X_pca.shape: " + str(X_pca.shape)
