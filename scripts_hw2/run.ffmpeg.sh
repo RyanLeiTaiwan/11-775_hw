@@ -20,8 +20,8 @@ mkdir -p temp ../keyframe
 #for line in $(cat ../list_hw2/train_dev.video)
 for line in $(cat ../list_hw2/test_hw2)
 do
-    ffmpeg -y -ss 0 -i $video_path/$line.mp4 -strict experimental -t $cut -r 15 -vf scale=$width"x"$height,setdar=4:3 ../temp/tmp_$cut.mp4
+    ffmpeg -y -ss 0 -i $video_path/$line.mp4 -strict experimental -t $cut -r 15 -vf scale=$width"x"$height,setdar=4:3 ../temp/tmp_$cut.mp4 || exit 1;
     mkdir -p ../keyframe/$line
-    ffmpeg -i ../temp/tmp_$cut.mp4 -vf select='eq(pict_type\,I)',setpts='N/(25*TB)' ../keyframe/$line/%05d.jpg
+    ffmpeg -i ../temp/tmp_$cut.mp4 -vf select='eq(pict_type\,I)',setpts='N/(25*TB)' ../keyframe/$line/%05d.jpg || exit 1;
 done
 

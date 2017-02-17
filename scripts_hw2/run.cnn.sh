@@ -9,5 +9,5 @@ cnn_path=../cnn_pred
 cnn_file=test
 
 mkdir -p $cnn_path
-python2 cnn.py $video_list $keyframe_path $cnn_path $cnn_file
+python2 cnn.py $video_list $keyframe_path $cnn_path $cnn_file || exit 1;
 

@@ -14,7 +14,7 @@ if __name__ == '__main__':
         print "Usage: {0} cluster_num video_list feat_path feat_suffix model_path".format(sys.argv[0])
         exit(1)
 
-    cluster_num = sys.argv[1]
+    cluster_num = int(sys.argv[1])
     video_list = open(sys.argv[2]).read().splitlines()
     feat_path = sys.argv[3]
     feat_suffix = sys.argv[4]
@@ -40,14 +40,13 @@ if __name__ == '__main__':
     X_all = np.array(X_all)
     print 'X_all.shape: ' + str(X_all.shape)
 
-    exit(0)
-
+    # K-means clustering
     print 'cluster_num: ' + str(cluster_num)
     kmeans = MiniBatchKMeans(n_clusters=cluster_num, batch_size=batch_size,
                              init="k-means++", n_init=n_init, verbose=verbose)
     kmeans.fit(X_all)
-    print 'K-means inertia: ' + str(kmeans.inertia_) + "\n"
-    print 'k_means.cluster_centers_.shape: ' + str(kmeans.cluster_centers_.shape)
+    print '  K-means inertia: ' + str(kmeans.inertia_) + "\n"
+    #print '  k_means.cluster_centers_.shape: ' + str(kmeans.cluster_centers_.shape)
 
     # Output the K-means model
     outputName = model_path + '/kmeans.' + str(cluster_num) + '.model'
