@@ -10,14 +10,15 @@ import cPickle
 # https://prateekvjoshi.com/2016/04/26/how-to-extract-feature-vectors-from-deep-neural-networks-in-python-caffe/
 
 if __name__ == '__main__':
-    if len(sys.argv) != 4:
-        print('Usage: {0} video_list keyframe_path cnn_path'.format(sys.argv[0]))
+    if len(sys.argv) != 5:
+        print('Usage: {0} video_list keyframe_path cnn_path cnn_file'.format(sys.argv[0]))
         exit(1)
 
     video_list = open(sys.argv[1], 'r').read().splitlines()
     keyframe_path = sys.argv[2]
     cnn_suffix = '.cnn.pk'
     cnn_path = sys.argv[3]
+    cnn_file = sys.argv[4]
 
     print "Setting up Caffe CNN..."
     batch_size = 1
@@ -46,14 +47,18 @@ if __name__ == '__main__':
     
 
     print '\nExtracting Caffe CNN features...'
+    # Only output one matrix of shape (#_of_videos, 4096)
+    X_all = []
     # Loop through each video's keyframe
     #for video in ['HVC51']:
     for video in video_list:
-        # Generate one matrix per video
-        X = []
+        # Generate one "averaged" vector per video
+        # TA: If the feature vector is sparse it is better to average rather than BoW
+        X_single = []
         pathname = keyframe_path + '/' + video
         # Look for only jpg files
         frames = fnmatch.filter(os.listdir(pathname), '*.jpg')
+        frames.sort()
         print 'video ' + video + ': ' + str(len(frames)) + ' keyframes'
         for frame in frames:
             inputName = pathname + '/' + frame
@@ -65,16 +70,24 @@ if __name__ == '__main__':
             # Extract the intermediate (fc7) layer as a numpy vector
             #print sum(net.blobs[layer].data[0] != 0)
             vector = net.blobs[layer].data[0]
-            X.append(list(vector))
-        X = np.array(X)
-        assert(X.shape[0] == len(frames))
+            X_single.append(list(vector))
+        # Video-level 
+        X_single = np.array(X_single)
+        assert(X_single.shape[0] == len(frames))
+        # Average over the all frames (rows)
+        X_single = np.mean(X_single, 0)
+        # Append X_single vector to X_all matrix
+        X_all.append(list(X_single))
 
-        # Output as cPickle
-        outputName = cnn_path + '/' + video + cnn_suffix
-        fout = open(outputName, 'wb')
-        cPickle.dump(X, fout)
-        print 'shape: ' + str(X.shape) + ' -> ' + outputName
-        fout.close()
+    # Top-level
+    X_all = np.array(X_all)
+    assert(X_all.shape[0] == len(video_list))
+    # Output as cPickle
+    outputName = cnn_path + '/' + cnn_file + cnn_suffix
+    print 'output matrix shape: ' + str(X_all.shape) + ' -> ' + outputName
+    fout = open(outputName, 'wb')
+    cPickle.dump(X_all, fout)
+    fout.close()
 
     print 'Caffe CNN features extracted successfully!'
 

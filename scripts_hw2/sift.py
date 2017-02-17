@@ -20,6 +20,8 @@ if __name__ == '__main__':
     sift_suffix = '.sift.pk'
     keypoint_path = sys.argv[4]
 
+    # Parameter: number of keypoints to detect
+    param_nfeatures = 20
     print 'Extracting SIFT features...'
     # for video in ['HVC51']:
     for video in video_list:
@@ -29,13 +31,14 @@ if __name__ == '__main__':
         pathname = keyframe_path + '/' + video
         # Look for only jpg files
         frames = fnmatch.filter(os.listdir(pathname), '*.jpg')
+        frames.sort()
         print 'video ' + video + ': ' + str(len(frames)) + ' keyframes'
         for frame in frames:
             inputName = pathname + '/' + frame
             img = cv2.imread(inputName)
             gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
             # nfeatures: the number of best features to retain
-            sift = cv2.xfeatures2d.SIFT_create(nfeatures=40)
+            sift = cv2.xfeatures2d.SIFT_create(nfeatures=param_nfeatures)
 
             # kp: keypoints, des: descriptors
             # des.shape = (Number_of_Keypoints, 128)
