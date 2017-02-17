@@ -22,6 +22,7 @@ if __name__ == '__main__':
 
     batch_size = 1000
     n_init = 3
+    max_iter = 100
     verbose = True
 
     # Set a fixed random seed so we can reproduce the results
@@ -42,8 +43,8 @@ if __name__ == '__main__':
 
     # K-means clustering
     print 'cluster_num: ' + str(cluster_num)
-    kmeans = MiniBatchKMeans(n_clusters=cluster_num, batch_size=batch_size,
-                             init="k-means++", n_init=n_init, verbose=verbose)
+    kmeans = MiniBatchKMeans(n_clusters=cluster_num, init='kmeans++', batch_size=batch_size,
+                             n_init=n_init, max_iter=max_iter, verbose=verbose)
     kmeans.fit(X_all)
     print '  K-means inertia: ' + str(kmeans.inertia_) + "\n"
     #print '  k_means.cluster_centers_.shape: ' + str(kmeans.cluster_centers_.shape)
