@@ -43,7 +43,7 @@ if __name__ == '__main__':
 
     # K-means clustering
     print 'cluster_num: ' + str(cluster_num)
-    kmeans = MiniBatchKMeans(n_clusters=cluster_num, init='kmeans++', batch_size=batch_size,
+    kmeans = MiniBatchKMeans(n_clusters=cluster_num, init='k-means++', batch_size=batch_size,
                              n_init=n_init, max_iter=max_iter, verbose=verbose)
     kmeans.fit(X_all)
     print '  K-means inertia: ' + str(kmeans.inertia_) + "\n"
