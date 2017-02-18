@@ -1,7 +1,4 @@
-#!/bin/python
-
 import numpy as np
-# import os
 from sklearn.cluster import MiniBatchKMeans
 import cPickle
 import sys
@@ -11,14 +8,14 @@ import sys
 if __name__ == '__main__':
 
     if len(sys.argv) != 6:
-        print "Usage: {0} cluster_num video_list feat_path feat_suffix model_path".format(sys.argv[0])
+        print "Usage: {0} cluster_num video_list feat_path feat_suffix model_file".format(sys.argv[0])
         exit(1)
 
     cluster_num = int(sys.argv[1])
     video_list = open(sys.argv[2]).read().splitlines()
     feat_path = sys.argv[3]
     feat_suffix = sys.argv[4]
-    model_path = sys.argv[5]
+    model_file = sys.argv[5]
 
     batch_size = 1000
     n_init = 3
@@ -46,12 +43,12 @@ if __name__ == '__main__':
     kmeans = MiniBatchKMeans(n_clusters=cluster_num, init='k-means++', batch_size=batch_size,
                              n_init=n_init, max_iter=max_iter, verbose=verbose)
     kmeans.fit(X_all)
-    print '  K-means inertia: ' + str(kmeans.inertia_) + "\n"
-    #print '  k_means.cluster_centers_.shape: ' + str(kmeans.cluster_centers_.shape)
+    print 'K-means inertia: ' + str(kmeans.inertia_) + "\n"
+    # print '  k_means.cluster_centers_.shape: ' + str(kmeans.cluster_centers_.shape)
 
     # Output the K-means model
-    outputName = model_path + '/kmeans.' + str(cluster_num) + '.model'
-    fout = open(outputName, 'wb')
+    print 'Output model to ' + model_file
+    fout = open(model_file, 'wb')
     cPickle.dump(kmeans, fout)
     fout.close()
 
