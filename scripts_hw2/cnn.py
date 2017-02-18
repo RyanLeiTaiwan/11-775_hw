@@ -10,15 +10,13 @@ import cPickle
 # https://prateekvjoshi.com/2016/04/26/how-to-extract-feature-vectors-from-deep-neural-networks-in-python-caffe/
 
 if __name__ == '__main__':
-    if len(sys.argv) != 5:
-        print('Usage: {0} video_list keyframe_path cnn_path cnn_file'.format(sys.argv[0]))
+    if len(sys.argv) != 4:
+        print('Usage: {0} video_list keyframe_path cnn_file'.format(sys.argv[0]))
         exit(1)
 
     video_list = open(sys.argv[1], 'r').read().splitlines()
     keyframe_path = sys.argv[2]
-    cnn_suffix = '.cnn.pk'
-    cnn_path = sys.argv[3]
-    cnn_file = sys.argv[4]
+    cnn_file = sys.argv[3]
 
     print "Setting up Caffe CNN..."
     batch_size = 1
@@ -83,9 +81,8 @@ if __name__ == '__main__':
     X_all = np.array(X_all)
     assert(X_all.shape[0] == len(video_list))
     # Output as cPickle
-    outputName = cnn_path + '/' + cnn_file + cnn_suffix
-    print 'output matrix shape: ' + str(X_all.shape) + ' -> ' + outputName
-    fout = open(outputName, 'wb')
+    print 'output matrix shape: ' + str(X_all.shape) + ' -> ' + cnn_file
+    fout = open(cnn_file, 'wb')
     cPickle.dump(X_all, fout)
     fout.close()
 
