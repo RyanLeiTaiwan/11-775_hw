@@ -84,6 +84,6 @@ if __name__ == '__main__':
 
     # Display average results
     print 'MAP: ' + str(np.mean(MAP))
-    print 'CLASS ACCURACY: ' + str(np.mean(ACC))
-    print 'TRUE POSITIVE RATE: ' + str(np.mean(TPR))
-    print 'TRUE NEGATIVE RATE: ' + str(np.mean(TNR))
+    print 'ACCURACY: ' + str(np.mean(ACC))
+    print 'TPR: ' + str(np.mean(TPR))
+    print 'TNR: ' + str(np.mean(TNR))
