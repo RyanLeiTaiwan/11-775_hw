@@ -16,13 +16,13 @@ if __name__ == '__main__':
     score_results = sys.argv[4]
     classification_results = sys.argv[5]
 
+    # Set a fixed random seed so we can reproduce the results
+    np.random.seed(11775)
+
     print 'Loading SVM model file ' + model_file
     fin = open(model_file)
     svm = cPickle.load(fin)
     fin.close()
-
-    # Set a fixed random seed so we can reproduce the results
-    np.random.seed(11775)
 
     print 'Loading feature matrix ' + feat_file
     fin = open(feat_file, 'rb')

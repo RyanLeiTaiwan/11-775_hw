@@ -33,12 +33,12 @@ do
 
         # [1] SVM training
         echo "##  TRAIN  ##"
-        #python2 train_svm.py $event $train_video_label $feat_path/train.$feat.pk $feat_path/svm.$event.model
+        python2 train_svm.py $event $train_video_label $feat_path/train.$feat.pk $feat_path/svm.$event.model
 
         # [2] SVM cross-validation (score reporting only)
         echo
         echo "##  VALIDATE  ##"
-        #python2 validate_svm.py $event $train_video_label $feat_path/train.$feat.pk $feat_path/svm.$event.model
+        python2 validate_svm.py $event $train_video_label $feat_path/train.$feat.pk $feat_path/svm.$event.model
 
     done
 done
@@ -50,7 +50,10 @@ echo "##  TEST  ##"
 P001_feat=cnn
 P002_feat=cnn
 P003_feat=cnn
+echo "=========  Event P001  ========="
 python2 test_svm.py P001 ../$P001_feat"_pred"/test.$P001_feat.pk ../$P001_feat"_pred"/svm.P001.model $score_results $classification_results
+echo "=========  Event P002  ========="
 python2 test_svm.py P002 ../$P002_feat"_pred"/test.$P002_feat.pk ../$P002_feat"_pred"/svm.P002.model $score_results $classification_results
+echo "=========  Event P003  ========="
 python2 test_svm.py P003 ../$P003_feat"_pred"/test.$P003_feat.pk ../$P003_feat"_pred"/svm.P003.model $score_results $classification_results
 

@@ -31,7 +31,7 @@ if __name__ == '__main__':
     print 'X.shape: ' + str(X.shape)
     fin.close()
 
-    print 'Loading labels ' + label_file
+    print 'Loading label file ' + label_file
     y = []
     fin = open(label_file, 'r')
     for label in fin.read().splitlines():
