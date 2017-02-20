@@ -37,18 +37,17 @@ if __name__ == '__main__':
     mu = mu.mean(1).mean(1)
     print 'mean-subtracted values:', zip('BGR', mu)
     transformer = caffe.io.Transformer({'data': net.blobs['data'].data.shape})
-    transformer.set_transpose('data', (2,0,1))
+    transformer.set_transpose('data', (2, 0, 1))
     transformer.set_mean('data', mu)
     transformer.set_raw_scale('data', 255)
-    transformer.set_channel_swap('data', (2,1,0))
+    transformer.set_channel_swap('data', (2, 1, 0))
     net.blobs['data'].reshape(batch_size, 3, 227, 227)
-    
 
     print '\nExtracting Caffe CNN features...'
     # Only output one matrix of shape (#_of_videos, 4096)
     X_all = []
     # Loop through each video's keyframe
-    #for video in ['HVC51']:
+    # for video in ['HVC51']:
     for video in video_list:
         # Generate one "averaged" vector per video
         # TA: If the feature vector is sparse it is better to average rather than BoW
@@ -66,10 +65,10 @@ if __name__ == '__main__':
             # Run the forward procedure
             output = net.forward()
             # Extract the intermediate (fc7) layer as a numpy vector
-            #print sum(net.blobs[layer].data[0] != 0)
+            # print sum(net.blobs[layer].data[0] != 0)
             vector = net.blobs[layer].data[0]
             X_single.append(list(vector))
-        # Video-level 
+        # Video-level
         X_single = np.array(X_single)
         assert(X_single.shape[0] == len(frames))
         # Average over the all frames (rows)
@@ -87,4 +86,3 @@ if __name__ == '__main__':
     fout.close()
 
     print 'Caffe CNN features extracted successfully!'
-

@@ -2,8 +2,8 @@
 
 # Extract SIFT features and draw keypoints for each keyframe
 
-#video_list=../list_hw2/train_dev.video
-video_list=../list_hw2/test_hw2_HVC4644
+video_list=../list_hw2/train_dev.video
+#video_list=../list_hw2/test_hw2
 keyframe_path=../keyframe
 sift_path=../sift
 keypoint_path=../keypoint
