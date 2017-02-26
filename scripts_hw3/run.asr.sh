@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# An example script for feature extraction of Homework 1
-
 # Paths to different tools and data
 eesen_path=$HOME/tools/eesen-offline-transcriber
 video_list=../list_hw3/all.video
@@ -9,21 +7,19 @@ audio_path=$HOME/hw3/audio
 asrtxt_path=../asr
 asrfeat_path=../asr_pred
 
-# Run ASR transcriber (speech2text)
-echo "Cleaning ASR transcrition output"
-echo "rm -rf $eesen_path/build/output/*"
-rm -rf $eesen_path/build/output/*
+mkdir -p $asrtxt_path
 echo "Running ASR transcriber (speech2text)"
+#for file in HVC72
 for file in $(cat $video_list)
 do
-    echo "$eesen_path/speech2text.sh $audio_path/$file.wav"
+    # It is very important to remove all previous files inside
+    # EESEN build directory before start decoding ANY file
+    rm -rf $eesen_path/build/*
+    # Run the ASR script
     $eesen_path/speech2text.sh $audio_path/$file.wav
+    # Copy the output txt to HW directory
+    cp $eesen_path/build/output/$file.txt $asrtxt_path
 done
-
-echo "Copying ASR transcriptions (txt) to HW directory"
-mkdir -p $asrtxt_path
-echo "cp $eesen_path/build/output/*.txt $asrtxt_path"
-cp $eesen_path/build/output/*.txt $asrtxt_path
 
 # Now we generate the ASR-based features. This requires a vocabulary file to available beforehand.
 # Each video is represented by a vector which has the same dimension as the size of the vocabulary.

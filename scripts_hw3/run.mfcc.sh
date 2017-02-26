@@ -25,7 +25,7 @@ mkdir -p $temp_path $audio_path $mfcc_path
 #for line in HVC51
 for line in $(cat $video_list)
 do
-    ffmpeg -y -i $video_path/${line}.mp4 -f wav $temp_path/tmp.wav
+    ffmpeg -y -i $video_path/$line.mp4 -f wav $temp_path/tmp.wav
     #ffmpeg -y -i $video_path/${line}.mp4 -ac 1 -f wav audio/$line.wav
     sox $temp_path/tmp.wav -c 1  $audio_path/$line.wav
     SMILExtract -C $mfcc_conf -I $audio_path/$line.wav -O $mfcc_path/$line.mfcc.csv
