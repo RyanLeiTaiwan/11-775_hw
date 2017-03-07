@@ -10,7 +10,8 @@ asrfeat_path=../asr_pred
 mkdir -p $asrtxt_path
 echo "Running ASR transcriber (speech2text)"
 #for file in HVC72
-for file in $(cat $video_list)
+for file in HVC5867 HVC5868
+#for file in $(cat $video_list)
 do
     # It is very important to remove all previous files inside
     # EESEN build directory before start decoding ANY file
