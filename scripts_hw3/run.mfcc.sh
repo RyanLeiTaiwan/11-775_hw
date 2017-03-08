@@ -11,7 +11,7 @@ video_path=$HOME/video   # path to the directory containing all the videos.
 mfcc_conf=../config/MFCC12_0_D_A.conf
 temp_path=../temp
 audio_path=../audio
-mfcc_path=../mfcc
+mfcc_path=../mfcc_csv
 mkdir -p $temp_path $audio_path $mfcc_path
 
 # This part does feature extraction, it may take quite a while if you have a lot of videos. Totally 3 steps are taken:
