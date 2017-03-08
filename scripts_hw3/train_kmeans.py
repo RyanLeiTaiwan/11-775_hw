@@ -17,7 +17,7 @@ if __name__ == '__main__':
     feat_suffix = sys.argv[4]
     model_file = sys.argv[5]
 
-    batch_size = 1000
+    batch_size = 10000
     n_init = 3
     max_iter = 100
     verbose = True
