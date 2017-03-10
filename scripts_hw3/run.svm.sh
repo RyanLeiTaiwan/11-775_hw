@@ -23,7 +23,7 @@ do
 
         # Test SVM to output score_results and classification_results for diagnosis
         echo "##  test SVM  ##"
-        python2 test_svm.py $event $feat_path/test.$feat.pk $feat_path/svm.$event.model $feat_path $feat_path
+        python2 test_svm.py $event $feat_path/test.$feat.pk $feat_path/svm.$feat.$event.model $feat_path $feat_path
     done
 
 done
