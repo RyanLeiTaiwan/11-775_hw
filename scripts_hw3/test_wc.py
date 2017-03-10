@@ -36,7 +36,7 @@ if __name__ == '__main__':
 
     # Test BoW model (word count matrix transform)
     BoW = model.transform(rawtxt)
-    X = BoW.toarray()
+    X = np.int_(BoW.toarray())
     vocab = model.get_feature_names()
     # print zip(range(len(vocab)), vocab)
 
