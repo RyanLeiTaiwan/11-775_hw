@@ -18,8 +18,9 @@ if __name__ == '__main__':
 
     # SVM parameters
     param_C = 1.0
-    param_probability = False
+    param_probability = True
     param_decision_function_shape = 'ovr'
+    param_random_state = 11775
 
     # Set a fixed random seed so we can reproduce the results
     np.random.seed(11775)
@@ -45,7 +46,8 @@ if __name__ == '__main__':
 
     print 'Training SVM...'
     svm = SVC(probability=param_probability, C=param_C,
-              decision_function_shape=param_decision_function_shape)
+              decision_function_shape=param_decision_function_shape,
+              random_state=param_random_state)
     # preprocessing.scale(): Normalize each column into 0 mean, 1 variance
     svm.fit(preprocessing.scale(X), y)
 

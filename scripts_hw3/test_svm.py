@@ -35,7 +35,10 @@ if __name__ == '__main__':
     # preprocessing.scale(): Normalize each column into 0 mean, 1 variance
     X_scaled = preprocessing.scale(X)
     # y_score may be of 2 columns in future sklearn version
-    y_score = svm.decision_function(X_scaled)
+    # Depending on training, y_score may be svm.decision_function or svm.predict_proba[:, 1]
+
+    # y_score = svm.decision_function(X_scaled)
+    y_score = svm.predict_proba(X_scaled)[:, 1]
     y_label = svm.predict(X_scaled)
 
     print 'Output score_results and classification_results'
