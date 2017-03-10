@@ -16,8 +16,8 @@ if __name__ == '__main__':
     pk_suffix = sys.argv[5]
 
     # Loop through each video's keyframe
-    for video in ['HVC51', 'HVC72']:
-    # for video in video_list:
+    # for video in ['HVC51', 'HVC72']:
+    for video in video_list:
         inputName = csv_path + '/' + video + csv_suffix
         outputName = pk_path + '/' + video + pk_suffix
         print inputName + ' -> ' + outputName
