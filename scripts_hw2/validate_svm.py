@@ -64,12 +64,13 @@ if __name__ == '__main__':
         # Train model and predict
         svm.fit(X_train, y_train)
         y_predict = svm.predict(X_valid)
+        y_score = svm.decision_function(X_valid)
         # print y_predict
         # print y_valid
 
         # Compute the metrics
         # [1] MAP
-        MAP.append(average_precision_score(y_valid, y_predict))
+        MAP.append(average_precision_score(y_valid, y_score))
         # [2] Class Accuracy
         ACC.append(accuracy_score(y_valid, y_predict))
 
