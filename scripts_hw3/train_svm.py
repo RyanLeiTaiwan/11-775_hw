@@ -18,7 +18,7 @@ if __name__ == '__main__':
 
     # SVM parameters
     param_C = 1.0
-    param_probability = True
+    param_probability = False
     param_decision_function_shape = 'ovr'
     param_random_state = 11775
 
