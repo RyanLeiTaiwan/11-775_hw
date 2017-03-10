@@ -3,7 +3,7 @@
 cluster_num=1000
 train_video_list=../list_hw3/train_dev.video
 test_video_list=../list_hw3/test_hw3
-feat=sift_uniform
+feat=sift_vfr
 feat_path=../$feat
 feat_suffix=".sift.pk"
 model_path=../kmeans_models

@@ -35,6 +35,7 @@ if __name__ == '__main__':
         # Vertically append X_single to X_all
         X_all += list(X_single)
 
+    print 'len(X_all): ' + str(len(X_all))
     X_all = np.array(X_all)
     print 'X_all.shape: ' + str(X_all.shape)
 

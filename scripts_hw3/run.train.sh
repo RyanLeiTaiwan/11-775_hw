@@ -3,9 +3,10 @@
 
 train_video_label=../list_hw3/train_label
 
-for feat in cnn_uniform cnn_vfr
-#for feat in mfcc asr imtraj sift cnn.uniform cnn.vfr
+for feat in asr imtraj
+#for feat in mfcc asr imtraj sift_uniform sift_vfr cnn_uniform cnn_vfr
 do
+    echo
     echo "====  Feature $feat  ===="
     #for event in P001
     for event in P001 P002 P003
