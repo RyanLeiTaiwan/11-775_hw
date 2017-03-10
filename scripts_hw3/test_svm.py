@@ -3,7 +3,7 @@ from sklearn import preprocessing
 import cPickle
 import sys
 
-# Train SVM and save the model to a local file
+# Test SVM and output score_results and classification_results
 
 if __name__ == '__main__':
     if len(sys.argv) != 6:
