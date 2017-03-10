@@ -22,12 +22,12 @@ test_BoW_file=$BoW_path/test.$feat.pk
 # Convert CSV files into pickle files
 echo "Converting CSV files into pickle files..."
 mkdir -p $pk_path
-python2 csv_pk.py $all_video_list $csv_path $csv_suffix $pk_path $pk_suffix
+#python2 csv_pk.py $all_video_list $csv_path $csv_suffix $pk_path $pk_suffix
 
 # Train a k-means model using the sklearn package
 echo "Training k-means models"
 mkdir -p $model_path
-python2 train_kmeans.py $cluster_num $train_video_list $feat_path $feat_suffix $model_file
+#python2 train_kmeans.py $cluster_num $train_video_list $feat_path $feat_suffix $model_file
 
 # Now that we have the k-means model, we can represent a whole video with the histogram of its MFCC vectors over the clusters. 
 # Each video is represented by a single vector which has the same dimension as the number of clusters. 
