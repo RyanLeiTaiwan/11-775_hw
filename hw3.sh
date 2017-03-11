@@ -1,5 +1,5 @@
 # For each event, run the validation script of the "best" (highest MAP) feature
-P001_pipeline=pipeline1
+P001_pipeline=pipeline2
 P002_pipeline=pipeline1
 P003_pipeline=pipeline1
 train_video_label=list_hw3/train_label
