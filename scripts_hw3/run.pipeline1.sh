@@ -36,7 +36,7 @@ do
         feat_str="$feat_str $feat_path/train.$feat.pk"
     done
     #echo $feat_str
-    #python2 validate_pipeline1.py $event $train_video_label $feat_str
+    python2 validate_pipeline1.py $event $train_video_label $feat_str
 
     # [3] Ensemble testing (generating "score results" and "classification results")
     echo

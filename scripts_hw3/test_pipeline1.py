@@ -27,8 +27,8 @@ sift_feat sift_model cnn_feat cnn_model score_results classification_results'.fo
 
     # Set a fixed random seed so we can reproduce the results
     np.random.seed(11775)
-    # # Highest MAP
-    weights = {'mfcc': 0.44, 'asr': 0.21, 'imtraj': 0.37, 'sift': 0.28, 'cnn': 0.93}
+    # Uniform weights
+    weights = {'mfcc': 1.00, 'asr': 1.00, 'imtraj': 1.00, 'sift': 1.00, 'cnn': 1.00}
 
     print 'Loading feature matrices:'
     print mfcc_feat
@@ -56,23 +56,23 @@ sift_feat sift_model cnn_feat cnn_model score_results classification_results'.fo
     print 'Loading SVM model files:'
     print mfcc_model
     fin = open(mfcc_model)
-    svm_mfcc = cPickle.load(fin)
+    svm_mfcc = cPickle.load(fin, 'rb')
     fin.close()
     print asr_model
     fin = open(asr_model)
-    svm_asr = cPickle.load(fin)
+    svm_asr = cPickle.load(fin, 'rb')
     fin.close()
     print imtraj_model
     fin = open(imtraj_model)
-    svm_imtraj = cPickle.load(fin)
+    svm_imtraj = cPickle.load(fin, 'rb')
     fin.close()
     print sift_model
     fin = open(sift_model)
-    svm_sift = cPickle.load(fin)
+    svm_sift = cPickle.load(fin, 'rb')
     fin.close()
     print cnn_model
     fin = open(cnn_model)
-    svm_cnn = cPickle.load(fin)
+    svm_cnn = cPickle.load(fin, 'rb')
     fin.close()
 
     print 'Ensemble testing...'
@@ -84,7 +84,9 @@ sift_feat sift_model cnn_feat cnn_model score_results classification_results'.fo
     y_score += weights['cnn'] * svm_cnn.decision_function(X_cnn)
     # Convert scores into class labels
     y_predict = np.int_(y_score > 0)
+    # print 'y_score.shape: ' + str(y_score.shape)
     # print 'y_score:\n' + str(y_score)
+    # print 'y_predict.shape: ' + str(y_predict.shape)
     # print 'y_predict:\n' + str(y_predict)
 
     print 'Output score_results and classification_results'

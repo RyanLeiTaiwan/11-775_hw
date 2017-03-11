@@ -7,7 +7,7 @@ from sklearn import base
 import cPickle
 import sys
 
-# MED Pipeline 1: Linear combination of prediction scores
+# MED Pipeline 1: Linear combination of prediction scores [Uniform weights]
 
 if __name__ == '__main__':
     if len(sys.argv) != 8:
@@ -24,7 +24,8 @@ if __name__ == '__main__':
     # Set a fixed random seed so we can reproduce the results
     np.random.seed(11775)
     # VotingClassifier weights
-    # weights = {'mfcc': 1.0, 'asr': 1.0, 'imtraj': 1.0, 'sift': 1.0, 'cnn': 1.0}
+    # Uniform weights
+    weights = {'mfcc': 1.00, 'asr': 1.00, 'imtraj': 1.00, 'sift': 1.00, 'cnn': 1.00}
     # P001 MAP
     # weights = {'mfcc': 0.33, 'asr': 0.19, 'imtraj': 0.28, 'sift': 0.28, 'cnn': 0.75}
     # P002 MAP
@@ -32,7 +33,7 @@ if __name__ == '__main__':
     # # P003 MAP
     # weights = {'mfcc': 0.17, 'asr': 0.21, 'imtraj': 0.27, 'sift': 0.20, 'cnn': 0.52}
     # # Highest MAP
-    weights = {'mfcc': 0.44, 'asr': 0.21, 'imtraj': 0.37, 'sift': 0.28, 'cnn': 0.93}
+    # weights = {'mfcc': 0.44, 'asr': 0.21, 'imtraj': 0.37, 'sift': 0.28, 'cnn': 0.93}
     # # Highest TPR
     # weights = {'mfcc': 0.04, 'asr': 0.02, 'imtraj': 0.02, 'sift': 0.02, 'cnn': 0.74}
     # # P002 TPR
@@ -86,8 +87,7 @@ if __name__ == '__main__':
     TNR = []
     kf = KFold(n_splits=3, shuffle=True)
     # This loop will run for 3 iterations
-    # HW3: No CV training this time. Just test the model on 3 folds (subsets) of training data
-    for train_idx, valid_idx in kf.split(X_mfcc):
+    for train_idx, valid_idx in kf.split(y):
         # Split data into train : valid = 2 : 1
         X_mfcc_train = X_mfcc[train_idx, :]
         X_mfcc_valid = X_mfcc[valid_idx, :]
