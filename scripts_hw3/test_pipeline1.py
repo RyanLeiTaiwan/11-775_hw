@@ -56,23 +56,23 @@ sift_feat sift_model cnn_feat cnn_model score_results classification_results'.fo
     print 'Loading SVM model files:'
     print mfcc_model
     fin = open(mfcc_model)
-    svm_mfcc = cPickle.load(fin, 'rb')
+    svm_mfcc = cPickle.load(fin)
     fin.close()
     print asr_model
     fin = open(asr_model)
-    svm_asr = cPickle.load(fin, 'rb')
+    svm_asr = cPickle.load(fin)
     fin.close()
     print imtraj_model
     fin = open(imtraj_model)
-    svm_imtraj = cPickle.load(fin, 'rb')
+    svm_imtraj = cPickle.load(fin)
     fin.close()
     print sift_model
     fin = open(sift_model)
-    svm_sift = cPickle.load(fin, 'rb')
+    svm_sift = cPickle.load(fin)
     fin.close()
     print cnn_model
     fin = open(cnn_model)
-    svm_cnn = cPickle.load(fin, 'rb')
+    svm_cnn = cPickle.load(fin)
     fin.close()
 
     print 'Ensemble testing...'
